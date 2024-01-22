@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://di134wsl521go"]
+
+[ext_resource type="Script" path="res://scripts/CameraMovement.gd" id="1_fsd4w"]
+[ext_resource type="Shader" path="res://Shaders/PixelationShader.gdshader" id="2_mn1ok"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ptlxs"]
+sky_top_color = Color(0, 0.133333, 0.196078, 1)
+sky_horizon_color = Color(0, 0.133333, 0.196078, 1)
+sky_curve = 0.0104022
+ground_bottom_color = Color(0, 0.133333, 0.196078, 1)
+ground_horizon_color = Color(0, 0.133333, 0.196078, 1)
+
+[sub_resource type="Sky" id="Sky_ulpt4"]
+sky_material = SubResource("ProceduralSkyMaterial_ptlxs")
+
+[sub_resource type="Environment" id="Environment_hfl0t"]
+background_mode = 2
+sky = SubResource("Sky_ulpt4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sfg7"]
+shader = ExtResource("2_mn1ok")
+shader_parameter/pixelSize = 4
+
+[sub_resource type="QuadMesh" id="QuadMesh_rta78"]
+material = SubResource("ShaderMaterial_8sfg7")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qxgtx"]
+size = Vector3(10, 5, 2.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rd4v"]
+diffuse_mode = 3
+specular_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctcdq"]
+shader = ExtResource("2_mn1ok")
+shader_parameter/pixelSize = 2
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hfl0t")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.992774, 0, -0.119998, 0.0130326, 0.994085, 0.107822, 0.119288, -0.108607, 0.986902, -0.483906, -1.92775, 18.0285)
+size = 10.0
+script = ExtResource("1_fsd4w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+visible = false
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_rta78")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.853682, -0.358629, 0.377641, 0.485637, 0.810082, -0.328516, -0.188105, 0.463845, 0.865716, -0.690146, -6.56177, -8.23002)
+mesh = SubResource("BoxMesh_qxgtx")
+surface_material_override/0 = SubResource("StandardMaterial3D_4rd4v")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.0833864, -0.885811, 0.456493, 0.978603, 0.0136788, 0.205304, -0.188105, 0.463845, 0.865716, 7.69748, -6.56177, -8.23002)
+mesh = SubResource("BoxMesh_qxgtx")
+surface_material_override/0 = SubResource("StandardMaterial3D_4rd4v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+light_bake_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ctcdq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

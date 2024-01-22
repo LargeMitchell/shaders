@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3dsvtaobgaw0"]
+
+[ext_resource type="Texture2D" uid="uid://dyt8t8j266a6k" path="res://textures/slso8-1x.png" id="2_t27hg"]
+[ext_resource type="Shader" path="res://Shaders/ditheringscene.gdshader" id="2_x5i3t"]
+[ext_resource type="Texture2D" uid="uid://b7evks64d5kth" path="res://textures/bayer16tile2.png" id="4_vvi2d"]
+
+[sub_resource type="Environment" id="Environment_jgfts"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.054902, 0.054902, 0.054902, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p4qkx"]
+shader = ExtResource("2_x5i3t")
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
+shader_parameter/u_offset = 0.0
+shader_parameter/u_dither_size = 2
+shader_parameter/invertpalette = false
+shader_parameter/u_dither_tex = ExtResource("4_vvi2d")
+shader_parameter/u_color_tex = ExtResource("2_t27hg")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.216505, -0.433016, 0.874999, 0.750001, 0.499998, 0.433013, -0.624999, 0.75, 0.21651, 0, 0, 0)
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.887729, 0.740131, 0.861647)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jgfts")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_p4qkx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.778926, 0)
+size = Vector3(20, 1, 20)

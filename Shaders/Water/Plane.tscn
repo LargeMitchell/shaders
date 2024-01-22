@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjiadlji1t1vn"]
+
+[ext_resource type="Shader" path="res://Shaders/Water/Plane.gdshader" id="1_oueqd"]
+[ext_resource type="Script" path="res://Shaders/Water/Plane.gd" id="2_w4v54"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_egh16"]
+render_priority = 0
+shader = ExtResource("1_oueqd")
+shader_parameter/out_color = Color(0, 0.2, 1, 1)
+shader_parameter/amount = 0.3
+shader_parameter/speed = 1.0
+shader_parameter/beer_factor = 1.0
+shader_parameter/metallic = 0.6
+shader_parameter/specular = 0.5
+shader_parameter/roughness = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2nn45"]
+material = SubResource("ShaderMaterial_egh16")
+size = Vector2(10, 10)
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.00130963, 0.0113914, 0.00342965)
+mesh = SubResource("PlaneMesh_2nn45")
+script = ExtResource("2_w4v54")
