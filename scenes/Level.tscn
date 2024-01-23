@@ -1,21 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://di134wsl521go"]
+[gd_scene load_steps=12 format=3 uid="uid://di134wsl521go"]
 
 [ext_resource type="Script" path="res://scripts/CameraMovement.gd" id="1_fsd4w"]
 [ext_resource type="Shader" path="res://Shaders/PixelationShader.gdshader" id="2_mn1ok"]
+[ext_resource type="Shader" path="res://scenes/ColorQuantizer.gdshader" id="3_8qmiu"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ptlxs"]
-sky_top_color = Color(0, 0.133333, 0.196078, 1)
-sky_horizon_color = Color(0, 0.133333, 0.196078, 1)
-sky_curve = 0.0104022
-ground_bottom_color = Color(0, 0.133333, 0.196078, 1)
-ground_horizon_color = Color(0, 0.133333, 0.196078, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1usbl"]
 
-[sub_resource type="Sky" id="Sky_ulpt4"]
-sky_material = SubResource("ProceduralSkyMaterial_ptlxs")
+[sub_resource type="Sky" id="Sky_rqccx"]
+sky_material = SubResource("ProceduralSkyMaterial_1usbl")
 
 [sub_resource type="Environment" id="Environment_hfl0t"]
 background_mode = 2
-sky = SubResource("Sky_ulpt4")
+background_color = Color(0.478431, 0, 0, 1)
+sky = SubResource("Sky_rqccx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8sfg7"]
 shader = ExtResource("2_mn1ok")
@@ -32,10 +29,11 @@ size = Vector3(10, 5, 2.4)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rd4v"]
 diffuse_mode = 3
 specular_mode = 1
+albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ctcdq"]
-shader = ExtResource("2_mn1ok")
-shader_parameter/pixelSize = 2
+shader = ExtResource("3_8qmiu")
+shader_parameter/color_resolution = Vector3(4, 4, 4)
 
 [node name="Level" type="Node3D"]
 

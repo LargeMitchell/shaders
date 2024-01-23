@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://8dey2egourph"]
 
-[ext_resource type="Shader" path="res://Shaders/ColorQuantizer.gdshader" id="1_3cf6i"]
+[ext_resource type="Shader" path="res://Shaders/CelShading.gdshader" id="1_3cf6i"]
 
 [sub_resource type="Gradient" id="Gradient_8ydeo"]
 colors = PackedColorArray(0.241667, 0, 0.58, 1, 1, 0.533333, 0, 1)
