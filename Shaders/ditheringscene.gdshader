@@ -1,9 +1,3 @@
-/* 
-This shader is under MIT license. Feel free to use, improve and 
-change this shader according to your needs and consider sharing 
-the modified result to godotshaders.com.
-*/
-
 shader_type canvas_item;
 
 uniform sampler2D u_dither_tex : repeat_enable, filter_nearest;
@@ -54,9 +48,6 @@ void fragment()
 	float lum_upper = (floor(lum * col_x) + 1.0) * col_texel_size;
 	float lum_scaled = lum * col_x - floor(lum * col_x); // calculates where lum lies between the upper and lower bound
 	
-	// map the dither texture onto the screen. there are better ways of doing this that makes the dither pattern 'stick'
-	// with objects in the 3D world, instead of being mapped onto the screen. see lucas pope's details posts on how he 
-	// achieved this in Obra Dinn: https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742
 	ivec2 noise_size = textureSize(u_dither_tex, 0);
 	vec2 inv_noise_size = vec2(1.0 / float(noise_size.x), 1.0 / float(noise_size.y));
 	vec2 noise_uv = UV * inv_noise_size * vec2(float(screen_size.x), float(screen_size.y));
